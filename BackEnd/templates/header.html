@@ -1,0 +1,10 @@
+<header>
+    <a>SGRA</a>
+    <ul>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'accountsapp:logout' %}">{{ user.username }}(Logout)</a></li>
+        {% else %}
+            <li><a href="{% url 'accountsapp:login' %}">Login</a></li>
+        {% endif %}
+    </ul>
+</header>

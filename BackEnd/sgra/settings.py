@@ -30,7 +30,7 @@ with open(os.path.join(BASE_DIR, '.env')) as env_file:
         line = line.replace('\n', '')
         start = line.find('=')
         key = line[:start]
-        value = line[start:]
+        value = line[start+1:]
         env_list[key] = value
 
 SECRET_KEY = env_list['SECRET_KEY']
@@ -50,6 +50,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.naver',
+
+    'accountsapp',
 ]
 
 MIDDLEWARE = [
@@ -67,7 +77,7 @@ ROOT_URLCONF = 'sgra.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -88,8 +98,12 @@ WSGI_APPLICATION = 'sgra.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env_list['DB_NAME'],
+        'USER': env_list['DB_USER'],
+        'PASSWORD': env_list['DB_PASSWORD'],
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -131,8 +145,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 2
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
