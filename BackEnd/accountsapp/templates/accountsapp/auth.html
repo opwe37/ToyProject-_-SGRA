@@ -1,11 +1,76 @@
 {% extends 'base.html' %}
 {% load socialaccount %}
+{% load static %}
 
 {% block content %}
 
-    <div>
-        <a href="{% provider_login_url 'google' %}">Login With Google</a>
-        <a href="{% provider_login_url 'naver' %}">Login With Naver</a>
-    </div>
+    <style>
+        .google-login {
+            background-image: url('{% static 'image/google_logo.png' %}');
+            background-size: 21px;
+            background-repeat: no-repeat;
+            background-position: 18px 9px;
+        }
 
+        .naver-login {
+            background-image: url('{% static 'image/naver_logo.png' %}');
+            background-size: 37px;
+            background-repeat: no-repeat;
+            background-position: 10px .5px;
+            background-color: #00c75a;
+            color: white !important;
+        }
+
+        .facebook-login {
+            background-image: url('{% static 'image/facebook_logo.png' %}');
+            background-size: 25px;
+            background-repeat: no-repeat;
+            background-position: 15px 7px;
+            background-color: #1777f2;
+            color: white !important;
+        }
+
+        .kakao-login {
+            background-image: url('{% static 'image/kakao_logo.png' %}');
+            background-size: 22px;
+            background-repeat: no-repeat;
+            background-position: 17px 9px;
+            background-color: #FEE500;
+            color: #000000 !important;
+        }
+
+        .social-login {
+            display: block;
+            zoom: 1;
+            padding-left: 55px;
+            height: 40px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            color: #666;
+            font-size: 1rem;
+            letter-spacing: -1px;
+            line-height: 40px;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li + li {
+            margin-top: .5rem;
+        }
+    </style>
+
+    <div style="width: 50%; margin: 5px auto;">
+        <h2>로그인</h2>
+        <ul>
+            <li><a class="social-login google-login" href="{% provider_login_url 'google' %}">구글 아이디로 로그인</a></li>
+            <li><a class="social-login naver-login" href="{% provider_login_url 'naver' %}">네이버 아이디로 로그인</a></li>
+            <li><a class="social-login kakao-login" href="#">카카오 아이디로 로그인</a></li>
+            <li><a class="social-login facebook-login" href="#">페이스북 아이디로 로그인</a></li>
+        </ul>
+    </div>
 {% endblock %}

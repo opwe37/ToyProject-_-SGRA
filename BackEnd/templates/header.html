@@ -1,10 +1,19 @@
 <header>
-    <a>SGRA</a>
-    <ul>
+    <div style="display: flex; justify-content: space-between; height: 50px; align-items:center">
+        <a>SGRA</a>
         {% if user.is_authenticated %}
-            <li><a href="{% url 'accountsapp:logout' %}">{{ user.username }}(Logout)</a></li>
+            <a href="{% url 'accountsapp:logout' %}">{{ user.username }}(Logout)</a>
         {% else %}
-            <li><a href="{% url 'accountsapp:login' %}">Login</a></li>
+            <a href="{% url 'accountsapp:login' %}">Login</a>
         {% endif %}
-    </ul>
+    </div>
+    <div style="text-align: center; height: 48px; line-height: 48px;">
+        <a href="#">전체</a>
+        <a href="#">어학</a>
+        <a href="#">취업</a>
+        <a href="#">고시/공무원</a>
+        <a href="#">취미/교양</a>
+        <a href="#">프로그래밍</a>
+        <a href="#">기타</a>
+    </div>
 </header>
