@@ -1,0 +1,7 @@
+{% if user.is_active %} <!-- 로그인된 상태에서 계정의 이름을 눌렀을 때 로그인 페이지를 보여줄 필요가 없으므로 링크를 지움 -->
+<li><a href="#"> <span class="glyphicon glyphicon-heart"></span> {{user.username}}</a></li>
+<li><a href="{% url 'account_logout' %}">Logout</a></li>
+{% else %}
+<li><a href="{% url 'account_login' %}"> <span class="glyphicon glyphicon-user"></span> Login</a></li>
+<li><a href="{% url 'admin:index' %}">Admin</a></li>
+{% endif %}
