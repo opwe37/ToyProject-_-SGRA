@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="comments-container">
+    {% for comment in comment_list %}
+      <div class="comment-item" data-key="{{ comment.pk }}">
+        <div class="body">
+          <strong>{{comment.writer}}</strong>
+          <p>{{comment.content}}</p>
+          {% if user == comment.writer %}
+            <div>
+              <a onclick="createEditDialog('{{comment.content}}', {{comment.pk}})">수정</a>
+              <a href="{% url 'commentapp:delete' pk=comment.pk %}">삭제</a>
+            </div>
+          {% endif %}
+        </div>
+        <script>
+          function createEditDialog(content, commentId) {
+            let template = `
+              <div>
+                <p><textarea name="" id="" cols="30" rows="10">__content__</textarea></p>
+                <div>
+                  <a onclick="commentEditCancel(__commentId__)">취소</a>
+                  <a>저장</a>
+                </div>
+              </div>
+            `;
+
+            const defaultSelector = `div.comment-item[data-key="${commentId}"] `;
+
+            const body = document.querySelector(defaultSelector + '.body');
+            body.hidden = true;
+
+            const editSelector = document.querySelector(defaultSelector + '.edit-dialog');
+            editSelector.innerHTML = '';
+            template = template.replace("__content__", content);
+            template = template.replace("__commentId__", commentId);
+            editSelector.innerHTML = template;
+            editSelector.hidden = false;
+          }
+        </script>
+
+        <div class="edit-dialog" hidden></div>
+        <script>
+            function commentEditCancel(commentId) {
+              const defaultSelector = `div.comment-item[data-key="${commentId}"] `;
+
+              const body = document.querySelector(defaultSelector + '.body');
+              body.hidden = false;
+
+              const editDialog = document.querySelector(defaultSelector + '.edit-dialog');
+              editDialog.hidden = true;
+            }
+          </script>
+
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
