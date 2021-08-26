@@ -1,0 +1,44 @@
+{% extends  'base.html' %}
+     {% block content %}
+        <table class="table" >
+            <thead class="bg-info">
+                <tr>
+                    <th>작성자</th>
+                    <th>제목</th>
+                    <th>지역</th>
+                    <th>인원수</th>
+                    <th>분야</th>
+                    <th>조회수</th>
+                    <th>댓글수</th>
+                    <th>작성일자</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                {% for topic in article_list %}
+                <tr>
+
+                    <td>{{topic.writer }}</td>
+
+                    <td >{{topic.title }}</td>
+
+                    <td>{{topic.region}}</td>
+                    <td>{{ topic.max_personnel }}</td>
+                    <td>{{ topic.progress_method }}</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>{{topic.created_at}}</td>
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <div class="mb-4">
+            <a href="{% url 'articleapp:create' %}" class="btn btn-info"><b>글 작성</b></a>
+        </div>
+
+{% endblock %}
