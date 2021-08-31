@@ -1,0 +1,36 @@
+[hidden] {
+    display: none !important;
+}
+
+[placeholder]:empty::before {
+  content: attr(placeholder);
+  color: #555;
+}
+
+.comment-item {
+  margin-top: 1rem;
+}
+
+.public-comment-input, .comment-reply-input {
+  border-bottom: 1px solid;
+}
+
+.comment-reply-btn, .public-comment-btn {
+  text-align: right;
+}
+
+.replies {
+  padding-left: 3rem;
+}
+
+.header {
+    display: flex;
+}
+
+.comment {
+    display: flex;
+}
+
+.body {
+    flex: 1;
+}

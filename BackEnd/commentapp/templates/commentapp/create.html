@@ -1,13 +1,10 @@
-{% extends 'base.html' %}
-
-{% block content %}
-
-    <div>
-        <form action="{% url 'commentapp:create' %}" method="post">
-            {% csrf_token %}
-            {{ form.as_table }}
-            <input type="submit" value="댓글">
-        </form>
+<div>
+    <div class="public-comment-input" contenteditable="True" placeholder="댓글 추가"></div>
+    <div class="public-comment-btn" hidden>
+        <label>
+            <input type="checkbox" name="secret"> 비밀댓글
+        </label>
+        <button class="comment-cancel">취소</button>
+        <button onclick="submitComment(1)">댓글</button>
     </div>
-
-{% endblock %}
+</div>
