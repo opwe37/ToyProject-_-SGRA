@@ -12,6 +12,19 @@
             {% block content %}
             {% endblock %}
         </main>
+        
+        {% if user.is_authenticated %}
+
+        {% for account in user.socialaccount_set.all %}
+        {% if account.provider == 'kakao' %}
+        <img src="{{ account.extra_data.kakao_account.profile.thumbnail_image_url }}" alt="">
+        {% else %}
+        <img src="{{ account.get_avatar_url }}" alt="">
+        {% endif %}
+        {% endfor %}
+
+        {% endif %}
+        
         <footer></footer>
     </body>
 </html>
