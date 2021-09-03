@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-
+{% load static %}
 {% block content %}
+<script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+<link rel="stylesheet" href="{% static 'beagle.css' %}" >
+
+{% include 'articleapp/article_header.html' %}
 
 <div class="text-center mw-500 m-auto">
     <div class = 'm-5'>
-        <h4>Update Article</h4>
+        <h4>업데이트!</h4>
     </div>
     <div>
         <form action="{% url 'articleapp:update' pk=target_article.pk %}"
@@ -21,7 +26,7 @@
     </div>
 
 </div>
-
+<script>var editor = new MediumEditor('.editable');</script>
 
 
 {% endblock %}

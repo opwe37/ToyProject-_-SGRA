@@ -2,13 +2,12 @@
 
 {% block content %}
 
-{% include 'articleapp/article_header.html' %}
 <div class="text-center mw-500 m-auto">
     <div class="m-5">
         <h4>Delete Article : {{ target_article.title }}</h4>
     </div>
     <div>
-        <form action="{% url 'articleapp:delete' pk=target_article.pk %}"
+        <form action="{% url 'freearticleapp:delete' pk=target_article.pk %}"
               method="post">
             {% csrf_token %}
             <div class="m-5">

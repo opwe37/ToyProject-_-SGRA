@@ -1,10 +1,10 @@
 {% extends  'base.html' %}
      {% block content %}
 
-     {% include 'articleapp/article_header.html' %}
+{% include 'articleapp/article_header.html' %}
          <div class="container">
              {% for topic in article_list %}
-
+                {% if topic.progress_method == '어학' %}
                      <a href="{% url 'articleapp:detail' pk=topic.pk %}" style="width: 100%">
                          <div class="col-sm-12">
                              <div class="card border-secondary">
@@ -19,7 +19,7 @@
                              </div>
                          </div>
                      </a>
-
+                {% endif %}
              {% endfor %}
          </div>
 

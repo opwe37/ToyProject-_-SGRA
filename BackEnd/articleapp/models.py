@@ -1,17 +1,16 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
 
+# Create your models here.
 class Article(models.Model):
 
-    writer = models.ForeignKey(User, on_delete=models.SET_NULL,
-                               related_name='article', null=True)
-    title = models.CharField(max_length=200, null=True)
+    writer = models.ForeignKey(User, on_delete=models.CASCADE,
+                               related_name='article')
+    title = models.CharField(max_length=200 ,verbose_name='제목')
     image = models.ImageField(upload_to='article/', null=True)
-    content = models.TextField(null=True)
-
-    created_at = models.DateField(auto_now_add=True,null=True)
+    content = models.TextField(verbose_name='글 내용')
+    created_at = models.DateTimeField(auto_now_add=True)
 
     NATIONAL_CHOICES1 = (
             ('서울특별시', '서울특별시'),
@@ -41,8 +40,10 @@ class Article(models.Model):
         ('6명이상', '6명이상')
     )
 
-    region = models.CharField(max_length=10, choices=NATIONAL_CHOICES1,default=True)
+    region = models.CharField(max_length=10, choices=NATIONAL_CHOICES1, default=True, verbose_name='지역')
+    progress_method = models.CharField(max_length=10, choices=NATIONAL_CHOICES2, default=True, verbose_name='분야')
+    max_personnel = models.CharField(max_length=10, choices=NATIONAL_CHOICES3, default=True, verbose_name='최대 인원 수')
+    hits = models.PositiveIntegerField(default=0, verbose_name='조회수')
 
-    progress_method = models.CharField(max_length=10, choices=NATIONAL_CHOICES2,default=True)
-
-    max_personnel = models.CharField(max_length=10, choices=NATIONAL_CHOICES3,default=True)
+    class Meta:
+        ordering = ['-created_at']

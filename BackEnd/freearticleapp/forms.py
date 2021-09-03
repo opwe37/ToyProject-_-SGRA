@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from articleapp.models import Article
+from freearticleapp.models import Article
 
 
 class ArticleCreationForm(ModelForm):
@@ -10,7 +10,7 @@ class ArticleCreationForm(ModelForm):
                                                                     'min-height : 10rem'}))
     class Meta:
         model = Article
-        fields = ['title', 'max_personnel', 'region', 'progress_method', 'content']
+        fields = ['title', 'content']
 
 
 class PostSearchForm(forms.Form):

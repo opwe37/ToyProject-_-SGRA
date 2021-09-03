@@ -1,0 +1,53 @@
+{% extends  'base.html' %}
+     {% block content %}
+
+     {% include 'articleapp/article_header.html' %}
+         <div class="container">
+             {% for topic in article_list %}
+                 <div style="border: 1px solid black">
+                     <a href="{% url 'articleapp:detail' pk=topic.pk %}" style="width: 100%">
+                         <div class="col-sm-12">
+                             <div class="card border-secondary">
+                                 <div>
+
+
+
+
+
+
+
+
+
+         </div>
+
+
+
+                            <p>{{ topic.writer }}</p>
+                            <p>{{ topic.title }}</p>
+
+                            <p>{{topic.region}}</p>
+                            <p>{{ topic.max_personnel }}</p>
+                            <p>{{ topic.progress_method }}</p>
+
+                            <p>{{ topic.hits }} </p>
+                            <p>{{topic.created_at}}</p>
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <div class="mb-4">
+            <a href="{% url 'articleapp:create' %}" class="btn btn-info"><b>글 작성</b></a>
+        </div>
+
+        <form class="form-inline my-2 my-lg-0" action="{% url 'articleapp:search' %}" method="post">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchWord" value="{{searchWord}}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+{% endblock %}
+
