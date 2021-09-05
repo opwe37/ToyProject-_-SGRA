@@ -1,10 +1,10 @@
 <header>
     <div style="display: flex; justify-content: space-between; height: 50px; align-items:center">
-        <a>SGRA</a>
+        <a href="/">SGRA</a>
         {% if user.is_authenticated %}
             <a href="{% url 'accountsapp:logout' %}">{{ user.username }}(Logout)</a>
         {% else %}
-            <a href="{% url 'accountsapp:login' %}">Login</a>
+            <a href="{% url 'accountsapp:login' %}?next={{ request.path }}">Login</a>
         {% endif %}
     </div>
 

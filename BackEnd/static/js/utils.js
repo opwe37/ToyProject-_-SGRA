@@ -26,3 +26,12 @@ function sendDataPost(url, data) {
     }
     ).then((response) => response.ok ? window.location.reload() : '');
 }
+
+function isAuthenticated() {
+    if (!is_authenticated) {
+        const curr_path = window.location.pathname;
+        location.href = `/accounts/login/?next=${curr_path}`;
+        return false;
+    }
+    return true;
+}

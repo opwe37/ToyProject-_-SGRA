@@ -67,9 +67,9 @@
     <div style="width: 50%; margin: 5px auto;">
         <h2>로그인</h2>
         <ul>
-            <li><a class="social-login google-login" href="{% provider_login_url 'google' %}">구글 아이디로 로그인</a></li>
-            <li><a class="social-login naver-login" href="{% provider_login_url 'naver' %}">네이버 아이디로 로그인</a></li>
-            <li><a class="social-login kakao-login" href="{% provider_login_url 'kakao' method='oauth2' %}">카카오 아이디로 로그인</a></li>
+            <li><a class="social-login google-login" href="{% provider_login_url 'google' %}?next={{ request.next }}">구글 아이디로 로그인</a></li>
+            <li><a class="social-login naver-login" href="{% provider_login_url 'naver' %}?next={{ request.next }}">네이버 아이디로 로그인</a></li>
+            <li><a class="social-login kakao-login" href="{% provider_login_url 'kakao' method='oauth2' %}?next={{ request.next }}">카카오 아이디로 로그인</a></li>
             <li><a class="social-login facebook-login" href="#">페이스북 아이디로 로그인</a></li>
         </ul>
     </div>

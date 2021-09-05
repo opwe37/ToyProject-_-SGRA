@@ -16,7 +16,7 @@
 
                 {% else %}
 
-                <p>{{ reply.content }}</p>
+                <p class="split-line">{{ reply.content }}</p>
                 {% include 'commentapp/reply-dialog.html' with parent=comment.pk target=reply.pk %}
 
                 {% endif %}
@@ -26,7 +26,7 @@
 
         {% if user == reply.writer %}
         <div>
-            <a onclick="createEditDialog('{{reply.content}}', {{reply.pk}}, '{{reply.secret}}')">수정</a>
+            <a onclick="createEditDialog(`{{ reply.content }}`, {{ reply.pk }}, '{{ reply.secret }}')">수정</a>
             <a href="{% url 'commentapp:delete' pk=reply.pk %}">삭제</a>
         </div>
         {% endif %}

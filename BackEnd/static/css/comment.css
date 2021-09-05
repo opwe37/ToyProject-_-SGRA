@@ -34,3 +34,7 @@
 .body {
     flex: 1;
 }
+
+.split-line {
+    white-space: pre-wrap;
+}
