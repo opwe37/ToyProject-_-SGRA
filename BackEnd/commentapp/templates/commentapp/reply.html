@@ -17,7 +17,7 @@
                 {% else %}
 
                 <p>{{ reply.content }}</p>
-                {% include 'commentapp/reply-dialog.html' with parent=comment.pk target=reply.pk %}
+                {% include 'commentapp/reply-dialog.html' with parent=comment.pk target=reply.pk article=article %}
 
                 {% endif %}
             </div>

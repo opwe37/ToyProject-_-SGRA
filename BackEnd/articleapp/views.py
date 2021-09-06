@@ -1,3 +1,4 @@
+import kwargs as kwargs
 import requests
 from django.contrib.auth.decorators import login_required
 
@@ -37,6 +38,7 @@ class ArticleDetailView(DetailView,FormMixin):
     context_object_name = 'target_article'
     form_class = CommentCreationForm
     template_name = 'articleapp/detail.html'
+
 
     def get(self, request, *args, **kwargs):
 

@@ -2,13 +2,13 @@
 
 <link rel="stylesheet" href="{% static 'css/comment.css' %}">
 
-{% include 'commentapp/create.html' %}
+{% include 'commentapp/create.html' with target_article=target_article %}
 
 <div class="comments-container">
-    {% for comment in comment_list %}
+    {% for comment in target_article.comments.all %}
 
     {% if comment.is_parent %}
-    {% include 'commentapp/comment.html' with comment=comment %}
+    {% include 'commentapp/comment.html' with comment=comment article=target_article %}
     {% endif %}
 
     {% endfor %}

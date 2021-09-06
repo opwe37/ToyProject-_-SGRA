@@ -34,26 +34,5 @@
         </div>
     </div>
 
-        <h3>댓글 목록 ({{ target_article.comments.all|length }})</h3>
-
-    <ul>
-    {% for comment in target_article.comments.all %}
-    <li>
-        {{ comment.content }} - {{ comment.create_at }}
-        <a href="{% url 'commentapp:create'  comment.pk %}">Edit</a>
-        <form action="{% url 'commentapp:delete' comment.pk %}" method = "POST">
-            {% csrf_token %}
-            <input type="submit" value="Delete!">
-        </form>
-    </li>
-    {% empty %}
-    <li>
-        작성된 댓글이 없습니다 :(
-    </li>
-    {% endfor %}
-</ul>
-   {% include 'commentapp/list.html' %}
-
-
-
+    {% include 'commentapp/list.html' with target_article=target_article %}
 {% endblock %}

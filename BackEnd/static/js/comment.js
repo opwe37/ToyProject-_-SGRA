@@ -30,13 +30,14 @@ function submitComment(article_pk) {
     data['content'] = input.innerHTML;
     data['article_pk'] = article_pk;
     data['secret'] = document.querySelector(".public-comment-btn input[type='checkbox']").checked;
+
     sendDataPost(COMMENT_CREATE_URL, data);
 }
 
 
-function submitCommentReply(parent_pk, target_comment=parent_pk) {
+function submitCommentReply(parent_pk, article_pk, target_comment=parent_pk) {
     const data = {};
-
+    console.log(target_comment)
     const input = document.querySelector(`div[data-key="${target_comment}"] .reply-container .comment-reply-input`);
     if (input.innerText.trimEnd() == '') {    // 보낼 데이터가 없다면
         input.innerHTML = "";
@@ -47,6 +48,7 @@ function submitCommentReply(parent_pk, target_comment=parent_pk) {
     data['content'] = input.innerHTML;
     data['parent_pk'] = parent_pk;
     data['secret'] = false;
+    data['article_pk'] = article_pk;
 
     sendDataPost(COMMENT_CREATE_URL, data);
 }

@@ -1,5 +1,6 @@
 import json
 
+import self
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -7,6 +8,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DeleteView, RedirectView
 
+from articleapp.models import Article
 from commentapp.forms import CommentCreationForm
 from commentapp.models import Comment
 
@@ -21,9 +23,11 @@ class CommentCreateView(CreateView):
         data = json.loads(request.body)
         parent = Comment.objects.get(pk=data['parent_pk']) if 'parent_pk' in data else None
         Comment(writer=request.user, content=data['content'],
-                parent=parent, secret=data['secret']).save()
+                parent=parent, secret=data['secret'],
+                article_id=data['article_pk']).save()
 
-        return self.get_success_url()
+        return self.get_success_url();
+
 
     def get_success_url(self):
         return HttpResponse(reverse('commentapp:list'))
