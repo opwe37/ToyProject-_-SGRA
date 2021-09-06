@@ -17,7 +17,7 @@
 
             {% else %}
 
-            <p>{{ comment.content }}</p>
+            <p class="split-line">{{ comment.content }}</p>
 
             {% include 'commentapp/reply-dialog.html' with parent=comment.pk target=None article=article.pk %}
 

@@ -1,7 +1,10 @@
-const PORT = "7777";
-const COMMENT_CREATE_URL = 'http://127.0.0.1:'+PORT+'/comment/create/';
-const COMMENT_UPDATE_URL = 'http://127.0.0.1:'+PORT+'/comment/update/__target__';
+const COMMENT_CREATE_URL = '/comment/create/';
+const COMMENT_UPDATE_URL = '/comment/update/__target__'
 
+const comment_input = document.querySelector('.public-comment-input');
+comment_input.addEventListener('focusin', e => {
+    isAuthenticated();
+});
 
 // 게시글의 댓글 작성
 const comment_cancel_btn = document.querySelector('.comment-cancel');
@@ -16,18 +19,16 @@ textArea.addEventListener('focusin', (e) => {
   btn.hidden = false;
 });
 
-// 요거 설정이 되야 button이 동작해요.
 function submitComment(article_pk) {
-    console.log("test")
     const data = {};
     const input = document.querySelector('.public-comment-input');
     if (input.innerText.trimEnd() == '') {    // 보낼 데이터가 없다면
-        input.innerHTML = "";
+        input.innerText = "";
         input.focus();
         return;
     }
 
-    data['content'] = input.innerHTML;
+    data['content'] = input.innerText;
     data['article_pk'] = article_pk;
     data['secret'] = document.querySelector(".public-comment-btn input[type='checkbox']").checked;
 
@@ -37,15 +38,15 @@ function submitComment(article_pk) {
 
 function submitCommentReply(parent_pk, article_pk, target_comment=parent_pk) {
     const data = {};
-    console.log(target_comment)
+
     const input = document.querySelector(`div[data-key="${target_comment}"] .reply-container .comment-reply-input`);
     if (input.innerText.trimEnd() == '') {    // 보낼 데이터가 없다면
-        input.innerHTML = "";
+        input.innerText = "";
         input.focus();
         return;
     }
 
-    data['content'] = input.innerHTML;
+    data['content'] = input.innerText;
     data['parent_pk'] = parent_pk;
     data['secret'] = false;
     data['article_pk'] = article_pk;
@@ -67,7 +68,7 @@ function submitCommentUpdate(comment_pk) {
 function createEditDialog(content, commentId, secret) {
   let template = `
     <div>
-      <div class="comment-reply-input" contenteditable="True">__content__</div>
+      <div class="comment-reply-input split-line" contenteditable="True">__content__</div>
       <div>
         <label><input type="checkbox" name="secret" __checked__></input> 비밀 댓글</label>
         <a onclick="commentEditCancel(__commentId__)">취소</a>
@@ -104,14 +105,16 @@ function commentEditCancel(commentId) {
 const reply_btns = document.querySelectorAll('.reply-btn');
 for (const reply_btn of reply_btns){
     reply_btn.addEventListener('click', e => {
-        const btn_parent = e.target.parentNode;
-        const dialog = btn_parent.querySelector('.reply-dialog');
+        if (isAuthenticated()) {
+            const btn_parent = e.target.parentNode;
+            const dialog = btn_parent.querySelector('.reply-dialog');
 
-        if (dialog.hidden) {
-            dialog.hidden = false;
-        } else {
-            const input = dialog.querySelector('.comment-reply-input');
-            input.focus();
+            if (dialog.hidden) {
+                dialog.hidden = false;
+            } else {
+                const input = dialog.querySelector('.comment-reply-input');
+                input.focus();
+            }
         }
     });
 }
