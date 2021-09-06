@@ -1,0 +1,18 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/comment.css' %}">
+
+{% include 'commentapp/create.html' %}
+
+<div class="comments-container">
+    {% for comment in comment_list %}
+
+    {% if comment.is_parent %}
+    {% include 'commentapp/comment.html' with comment=comment %}
+    {% endif %}
+
+    {% endfor %}
+</div>
+
+<script src="{% static 'js/utils.js' %}"></script>
+<script src="{% static 'js/comment.js' %}"></script>

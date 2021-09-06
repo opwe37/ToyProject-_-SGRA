@@ -1,0 +1,23 @@
+<div class="reply-container">
+    <a class="reply-btn"> 답글 </a>
+    <div class="reply-dialog" hidden>
+
+        <div class="comment-reply-input" contenteditable="True" placeholder="댓글 추가"></div>
+        <div class="comment-reply-btn">
+
+            <label>
+                <input type="checkbox" name="secret"> 비밀댓글
+            </label>
+
+            <button class="reply-cancel">취소</button>
+
+            {% if target %}
+            <button class="reply-submit" onclick="submitCommentReply({{ parent }}, {{ target }})">댓글</button>
+            {% else %}
+            <button class="reply-submit" onclick="submitCommentReply({{ parent }})">댓글</button>
+            {% endif %}
+
+        </div>
+
+    </div>
+</div>

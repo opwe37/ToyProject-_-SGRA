@@ -61,11 +61,14 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.kakao',
 
-    'accountsapp',
-    'articleapp',
     'bootstrap4',
     'hitcount',
-    'freearticleapp'
+
+    'accountsapp',
+    'articleapp',
+    'freearticleapp',
+
+    'commentapp',
 ]
 
 MIDDLEWARE = [

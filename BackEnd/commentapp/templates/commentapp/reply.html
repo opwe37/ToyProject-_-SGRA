@@ -1,0 +1,35 @@
+<div class="comment-item" data-key="{{ reply.pk }}">
+    <div class="comment">
+        <div class="thumbnail"></div>
+
+        <div class="body">
+
+            <div class="header">
+                <span><b>{{ reply.writer }}</b></span>
+                <span>{{ reply.created_string }}</span>
+            </div>
+
+            <div class="main">
+                {% if reply.secret and reply.writer != user %}
+
+                <p> 비밀 댓글 입니다. </p>
+
+                {% else %}
+
+                <p>{{ reply.content }}</p>
+                {% include 'commentapp/reply-dialog.html' with parent=comment.pk target=reply.pk %}
+
+                {% endif %}
+            </div>
+
+        </div>
+
+        {% if user == reply.writer %}
+        <div>
+            <a onclick="createEditDialog('{{reply.content}}', {{reply.pk}}, '{{reply.secret}}')">수정</a>
+            <a href="{% url 'commentapp:delete' pk=reply.pk %}">삭제</a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="edit-dialog" hidden></div>
+</div>
