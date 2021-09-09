@@ -10,11 +10,13 @@ from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView, FormView
 from django.views.generic.edit import FormMixin
+from django.views.generic.list import MultipleObjectMixin
 
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleCreationForm, PostSearchForm
 from articleapp.models import Article
 from commentapp.forms import CommentCreationForm
+from freearticleapp.models import FreeArticle
 
 
 @method_decorator(login_required, 'get')
@@ -32,13 +34,11 @@ class ArticleCreateView(CreateView):
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
 
-
 class ArticleDetailView(DetailView,FormMixin):
     model = Article
     context_object_name = 'target_article'
     form_class = CommentCreationForm
     template_name = 'articleapp/detail.html'
-
 
     def get(self, request, *args, **kwargs):
 
@@ -47,7 +47,6 @@ class ArticleDetailView(DetailView,FormMixin):
         clicked_article.save()
         print(clicked_article.hits)
         return super().get(request, *args, **kwargs)
-
 
 
 @method_decorator(article_ownership_required, 'get')
@@ -93,6 +92,7 @@ class SearchFormView(FormView):
 
         return render(self.request, self.template_name, context)
 
+
         
 class ArticleListView1(ListView):
     model = Article
@@ -100,11 +100,13 @@ class ArticleListView1(ListView):
     template_name = 'articleapp/list_language_study.html'
     paginate_by = 20
 
+
 class ArticleListView2(ListView):
     model = Article
     context_object_name = 'article_list'
     template_name = 'articleapp/list_employment.html'
     paginate_by = 20
+
 
 class ArticleListView3(ListView):
     model = Article
@@ -112,11 +114,13 @@ class ArticleListView3(ListView):
     template_name = 'articleapp/list_public_officer.html'
     paginate_by = 20
 
+
 class ArticleListView4(ListView):
     model = Article
     context_object_name = 'article_list'
     template_name = 'articleapp/list_hobby.html'
     paginate_by = 20
+
 
 class ArticleListView5(ListView):
     model = Article
@@ -124,8 +128,26 @@ class ArticleListView5(ListView):
     template_name = 'articleapp/list_programming.html'
     paginate_by = 20
 
+
 class ArticleListView6(ListView):
     model = Article
     context_object_name = 'article_list'
     template_name = 'articleapp/list_other.html'
     paginate_by = 20
+
+
+class ArticleHomeView(ListView):
+    model = Article
+    context_object_name = 'article_list'
+    template_name = 'articleapp/home.html'
+
+    def get_queryset(self):
+        return Article.objects.order_by('-created_at')[:5]
+
+    def get_context_data(self, **kwargs):
+        article_free_list = FreeArticle.objects.all()
+        return super().get_context_data(article_free_list=article_free_list,
+                                        **kwargs)
+
+
+

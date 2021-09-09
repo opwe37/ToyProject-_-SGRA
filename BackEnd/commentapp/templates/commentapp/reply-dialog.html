@@ -12,7 +12,7 @@
             <button class="reply-cancel">취소</button>
 
             {% if target %}
-            <button class="reply-submit" onclick="submitCommentReply({{ parent }}, {{ article }}, {{ target }})">댓글</button>
+            <button class="reply-submit" onclick="submitCommentReply({{ parent }}, {{ article }},{{ target }})">댓글</button>
             {% else %}
             <button class="reply-submit" onclick="submitCommentReply({{ parent }}, {{ article }})">댓글</button>
             {% endif %}

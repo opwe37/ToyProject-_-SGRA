@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from freearticleapp.models import Article
+from freearticleapp.models import FreeArticle
 
 
 class ArticleCreationForm(ModelForm):
@@ -9,7 +9,7 @@ class ArticleCreationForm(ModelForm):
                                                            'style': 'text-align : left;'
                                                                     'min-height : 10rem'}))
     class Meta:
-        model = Article
+        model = FreeArticle
         fields = ['title', 'content']
 
 

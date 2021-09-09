@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from articleapp import views
 from articleapp.views import ArticleCreateView, ArticleDetailView, ArticleUpdateView, ArticleDeleteView, \
     ArticleListView, ArticleListView6, ArticleListView1, ArticleListView2, ArticleListView3, ArticleListView4, \
-    ArticleListView5
+    ArticleListView5, ArticleHomeView
 
 app_name = 'articleapp'
 
@@ -28,6 +28,5 @@ urlpatterns = [
 
     path('search/', views.SearchFormView.as_view(), name='search'),
 
-
-
+    path('home/', ArticleHomeView.as_view(), name='home')
 ]

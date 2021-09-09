@@ -6,14 +6,17 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, FormView
+from django.views.generic.edit import FormMixin
+from django.views.generic.list import MultipleObjectMixin
 
+from commentapp.forms import CommentCreationForm
 from freearticleapp.decorators import article_ownership_required
 from freearticleapp.forms import ArticleCreationForm, PostSearchForm
-from freearticleapp.models import Article
+from freearticleapp.models import FreeArticle
 
 
 class ArticleListView(ListView):
-    model = Article
+    model = FreeArticle
     context_object_name = 'article_free_list'
     template_name = 'freearticleapp/free_list.html'
     paginate_by = 20
@@ -21,7 +24,7 @@ class ArticleListView(ListView):
 @method_decorator(login_required, 'get')
 @method_decorator(login_required, 'post')
 class ArticleCreateView(CreateView):
-    model = Article
+    model = FreeArticle
     form_class = ArticleCreationForm
     template_name = 'freearticleapp/create.html'
 
@@ -34,14 +37,15 @@ class ArticleCreateView(CreateView):
 
 
 
-class ArticleDetailView(DetailView):
-    model = Article
+class ArticleDetailView(DetailView,FormMixin):
+    model = FreeArticle
     context_object_name = 'target_article'
+    form_class = CommentCreationForm
     template_name = 'freearticleapp/detail.html'
 
     def get(self, request, *args, **kwargs):
 
-        clicked_article = Article.objects.get(pk=kwargs['pk'])
+        clicked_article = FreeArticle.objects.get(pk=kwargs['pk'])
         clicked_article.hits += 1
         clicked_article.save()
         print(clicked_article.hits)
@@ -52,7 +56,7 @@ class ArticleDetailView(DetailView):
 @method_decorator(article_ownership_required, 'get')
 @method_decorator(article_ownership_required, 'post')
 class ArticleUpdateView(UpdateView):
-    model = Article
+    model = FreeArticle
     form_class = ArticleCreationForm
     context_object_name = 'target_article'
     template_name = 'freearticleapp/update.html'
@@ -64,7 +68,7 @@ class ArticleUpdateView(UpdateView):
 @method_decorator(article_ownership_required, 'get')
 @method_decorator(article_ownership_required, 'post')
 class ArticleDeleteView(DeleteView):
-    model = Article
+    model = FreeArticle
     context_object_name = 'target_article'
     success_url = reverse_lazy('freearticleapp:list')
     template_name = 'freearticleapp/delete.html'
@@ -76,7 +80,7 @@ class SearchFormView(FormView):
 
     def form_valid(self, form):
         searchWord = form.cleaned_data['search_word']
-        post_list = Article.objects.filter(Q(title__icontains=searchWord) | Q(content__icontains=searchWord) | Q(writer__username__icontains=searchWord)).distinct()
+        post_list = FreeArticle.objects.filter(Q(title__icontains=searchWord) | Q(content__icontains=searchWord) | Q(writer__username__icontains=searchWord)).distinct()
 
         context = {}
         context['form'] = form
@@ -84,3 +88,11 @@ class SearchFormView(FormView):
         context['object_list'] = post_list
 
         return render(self.request, self.template_name, context)
+
+class FreeArticleHomeView(ListView):
+    model = FreeArticle
+    context_object_name = 'article_free_list'
+    template_name = 'freearticleapp/home.html'
+
+    def get_queryset(self):
+        return FreeArticle.objects.order_by('-created_at')[:5]
