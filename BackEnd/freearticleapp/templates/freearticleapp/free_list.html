@@ -1,0 +1,32 @@
+{% extends  'base.html' %}
+     {% block content %}
+
+         <div class="container">
+             {% for topic in article_free_list %}
+                     <a href="{% url 'freearticleapp:detail' pk=topic.pk %}" style="width: 100%">
+                         <div class="col-sm-12">
+                             <div class="card border-secondary">
+                                 <div class="card-body">
+                                     <h4 class="card-title">제목 : {{ topic.title }}</h4>
+                                     <h6 class="card-subtitle mb-2 text-muted">작성자 : {{ topic.writer }}  </h6>
+                                     <h6 class="card-subtitle mb-2 text-muted">작성일자 : {{ topic.created_at }}  </h6>
+                                     <h6 class="card-subtitle mb-2 text-muted">조회수 : {{ topic.hits }}</h6>
+                                 </div>
+                             </div>
+                         </div>
+                     </a>
+             {% endfor %}
+         </div>
+
+        <div class="mb-4" style="text-align: right">
+            <a href="{% url 'freearticleapp:create' %}" class="btn btn-info" style="height: auto; bottom: auto"><b>글 작성</b></a>
+        </div>
+
+        <form class="form-inline my-2 my-lg-0" action="{% url 'freearticleapp:search' %}" method="post">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search_word" value="{{search_word}}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+{% endblock %}
+

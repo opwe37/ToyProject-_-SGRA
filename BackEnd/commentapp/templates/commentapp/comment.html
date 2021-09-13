@@ -19,7 +19,7 @@
 
             <p class="split-line">{{ comment.content }}</p>
 
-            {% include 'commentapp/reply-dialog.html' with parent=comment.pk target=None %}
+            {% include 'commentapp/reply-dialog.html' with parent=comment.pk target=None article=article.pk %}
 
             {% endif %}
 
@@ -44,7 +44,7 @@
     <div class="replies">
         {% for reply in comment.children %}
 
-        {% include 'commentapp/reply.html' with comment=comment reply=reply %}
+        {% include 'commentapp/reply.html' with comment=comment reply=reply article=article.pk %}
 
         {% endfor %}
     </div>

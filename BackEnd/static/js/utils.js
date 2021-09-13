@@ -24,7 +24,7 @@ function sendDataPost(url, data) {
         credentials: 'include',
         body: JSON.stringify(data),
     }
-    ).then((response) => response.ok ? window.location.reload() : '');
+    ).then((response) => response.ok ? window.location.reload() : console.log("error"));
 }
 
 function isAuthenticated() {
