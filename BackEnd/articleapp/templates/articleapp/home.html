@@ -2,7 +2,7 @@
 {% block content %}
 
     <h2 style="text-align: center; margin-bottom: 3.5rem; ">스터디 게시판!</h2>
-    <div class="container" style="padding-right: 30rem; text-align: center; align-items: center ">
+    <div class="container" style="padding-right: 30rem; text-align: center; align-items: center; ">
     {% for topic in article_list %}
         <a href="{% url 'articleapp:detail' pk=topic.pk %}" style="width: 100%">
                         <div class="col-sm-12">
