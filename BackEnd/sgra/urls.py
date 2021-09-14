@@ -24,5 +24,6 @@ urlpatterns = [
     path('authaccounts/', include('allauth.urls')),
     path('articles/', include('articleapp.urls')),
     path('freearticles/',include('freearticleapp.urls')),
-    path('comment/', include('commentapp.urls')),
+    path('comment/', include('commentapp.urls'), name='comment'),
+    path('profile/', include('profileapp.urls'), name="profile")
 ]

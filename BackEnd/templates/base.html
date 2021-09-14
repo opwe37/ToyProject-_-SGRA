@@ -17,8 +17,7 @@
             {% block content %}
             {% endblock %}
         </main>
-
-        {#    아래 코드는 로그인할때 받아온 정보로 썸네일(프로필 이미지) 한번 띄어본 코드입니다.    #}
+        
         {% if user.is_authenticated %}
 
         {% for account in user.socialaccount_set.all %}
@@ -30,7 +29,7 @@
         {% endfor %}
 
         {% endif %}
-
+        
         <footer></footer>
 
         <script>
