@@ -62,7 +62,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.kakao',
 
     'bootstrap4',
-    'hitcount',
 
     'accountsapp',
     'articleapp',

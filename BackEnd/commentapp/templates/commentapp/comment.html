@@ -1,7 +1,9 @@
 <div class="comment-item" data-key="{{ comment.pk }}">
     <div class="comment">
 
-        <div class="thumbnail"></div>
+        <div class="thumbnail">
+            <img src="{{ comment.writer.profile.thumbnail }}" alt="" class="thumbnail-image">
+        </div>
 
         <div class="body">
             <div class="header">

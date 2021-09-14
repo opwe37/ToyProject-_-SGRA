@@ -19,9 +19,13 @@ class CommentCreateView(CreateView):
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
         parent = Comment.objects.get(pk=data['parent_pk']) if 'parent_pk' in data else None
+
+        article_id = data['article_pk'] if 'article_pk' in data else None
+        free_article_id = data['freearticle_pk'] if 'freearticle_pk' in data else None
+
         Comment(writer=request.user, content=data['content'],
                 parent=parent, secret=data['secret'],
-                article_id=data['article_pk'],freearticle_id=data['article_pk']).save()
+                article_id=article_id, freearticle_id=free_article_id).save()
 
         return self.get_success_url()
 

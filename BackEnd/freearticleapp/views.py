@@ -21,6 +21,7 @@ class ArticleListView(ListView):
     template_name = 'freearticleapp/free_list.html'
     paginate_by = 20
 
+
 @method_decorator(login_required, 'get')
 @method_decorator(login_required, 'post')
 class ArticleCreateView(CreateView):
@@ -36,8 +37,7 @@ class ArticleCreateView(CreateView):
         return reverse('freearticleapp:detail', kwargs={'pk': self.object.pk})
 
 
-
-class ArticleDetailView(DetailView,FormMixin):
+class ArticleDetailView(DetailView, FormMixin):
     model = FreeArticle
     context_object_name = 'target_article'
     form_class = CommentCreationForm
@@ -50,7 +50,6 @@ class ArticleDetailView(DetailView,FormMixin):
         clicked_article.save()
         print(clicked_article.hits)
         return super().get(request, *args, **kwargs)
-
 
 
 @method_decorator(article_ownership_required, 'get')

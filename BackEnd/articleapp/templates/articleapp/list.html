@@ -1,37 +1,44 @@
 {% extends  'base.html' %}
-     {% block content %}
+{% block content %}
 
-     {% include 'articleapp/article_header.html' %}
-         <div class="container">
-             {% for topic in article_list %}
+{% include 'articleapp/article_header.html' %}
 
-                     <a href="{% url 'articleapp:detail' pk=topic.pk %}" style="width: 100%">
-                         <div class="col-sm-12">
-                             <div class="card border-secondary">
-                                 <div class="card-body">
-                                     <h4 class="card-title">제목 : {{ topic.title }}</h4>
-                                     <h6 class="card-subtitle mb-2 text-muted">작성자 : {{ topic.writer }}  </h6>
-                                     <h6 class="card-subtitle mb-2 text-muted">분야 : {{ topic.progress_method }}  </h6>
-                                     <h6 class="card-subtitle mb-2 text-muted">작성일자 : {{ topic.created_at }}  </h6>
-                                     <h6 class="card-subtitle mb-2 text-muted">지역 : {{ topic.region }}  </h6>
-                                     <h6 class="card-subtitle mb-2 text-muted">조회수 : {{ topic.hits }}</h6>
-                                 </div>
-                             </div>
-                         </div>
-                     </a>
+<div class="mb-4" style="text-align: right; position:fixed; bottom: 3rem; right: 3rem; z-index:1000">
+    <a href="{% url 'articleapp:create' %}" class="btn btn-outline-dark rounded-circle">
+        <span class="material-icons-outlined" style="font-size: 3rem">add</span>
+    </a>
+</div>
 
-             {% endfor %}
-         </div>
+<form class="form-inline mb-4" action="{% url 'articleapp:search' %}" method="post" style="display: flex;">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_word" value="{{search_word}}" style="flex:1;">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
 
-        <div class="mb-4" style="text-align: right">
-            <a href="{% url 'articleapp:create' %}" class="btn btn-info" style="height: auto; bottom: auto"><b>글 작성</b></a>
-        </div>
+<hr/>
 
-        <form class="form-inline my-2 my-lg-0" action="{% url 'articleapp:search' %}" method="post">
-        {% csrf_token %}
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search_word" value="{{search_word}}">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+<div class="my-4">
+{% for topic in article_list %}
+    <div class="col-sm-12 mt-3">
+        <a href="{% url 'articleapp:detail' pk=topic.pk %}">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <span class="card-text">#{{ topic.progress_method }}</span>
+                        <span class="card-text">#{{ topic.region }}</span>
+                    </div>
+                    <h4 class="card-title">{{ topic.title }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">작성자: {{ topic.writer }}  </h6>
+        <!--                    <h6 class="card-subtitle mb-2 text-muted">분야 : {{ topic.progress_method }}  </h6>-->
+                    <h6 class="card-subtitle mb-2 text-muted">{{ topic.created_at }}  </h6>
+        <!--                    <h6 class="card-subtitle mb-2 text-muted">지역 : {{ topic.region }}  </h6>-->
+                    <h6 class="card-subtitle mb-2 text-muted">조회수: {{ topic.hits }}</h6>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endfor %}
+</div>
 
 {% endblock %}
 

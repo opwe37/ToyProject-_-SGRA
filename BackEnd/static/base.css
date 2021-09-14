@@ -75,7 +75,7 @@
 }
 
 a{
-    text_decoration:none;
+    text-decoration: none;
     color: black;
 }
 
@@ -83,3 +83,8 @@ a:hover{
     color:black;
 }
 
+.thumbnail-image {
+    border-radius: 20rem;
+    width: 2.5rem;
+    margin-right: 1rem;
+}

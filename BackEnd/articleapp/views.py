@@ -1,5 +1,3 @@
-import kwargs as kwargs
-import requests
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -10,7 +8,6 @@ from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView, FormView
 from django.views.generic.edit import FormMixin
-from django.views.generic.list import MultipleObjectMixin
 
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleCreationForm, PostSearchForm
@@ -34,7 +31,7 @@ class ArticleCreateView(CreateView):
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
 
-class ArticleDetailView(DetailView,FormMixin):
+class ArticleDetailView(DetailView, FormMixin):
     model = Article
     context_object_name = 'target_article'
     form_class = CommentCreationForm
@@ -66,7 +63,7 @@ class ArticleUpdateView(UpdateView):
 class ArticleDeleteView(DeleteView):
     model = Article
     context_object_name = 'target_article'
-    success_url = reverse_lazy('articleapp:list')
+    success_url = reverse_lazy('articleapp:list_all')
     template_name = 'articleapp/delete.html'
 
 
@@ -93,7 +90,6 @@ class SearchFormView(FormView):
         return render(self.request, self.template_name, context)
 
 
-        
 class ArticleListView1(ListView):
     model = Article
     context_object_name = 'article_list'

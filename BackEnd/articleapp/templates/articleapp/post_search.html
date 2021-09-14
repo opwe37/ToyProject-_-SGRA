@@ -17,7 +17,9 @@
 
 {% if object_list %}
     {% for post in object_list %}
-        <h2 class="article_content"><a href='{% url 'articleapp:detail' pk=post.pk %}'>{{ post.title |safe }}</a></h2>
+        <h2 class="article_content">
+            <a href="{% url 'articleapp:detail' pk=post.pk %}">{{ post.title | safe }}</a>
+        </h2>
         {{ post.created_at|date:"N d, Y" }}
         <p>{{ post.content | safe }}</p>
         <div>----------------------------------------------</div>

@@ -9,14 +9,14 @@ from articleapp.views import ArticleCreateView, ArticleDetailView, ArticleUpdate
 app_name = 'articleapp'
 
 urlpatterns = [
-    path('list/', ArticleListView.as_view(), name='list'),
+    path('list/', ArticleListView.as_view(), name='list_all'),
 
-    path('language_study/', ArticleListView1.as_view(), name='list'),
-    path('employment/', ArticleListView2.as_view(), name='list'),
-    path('public_officer/', ArticleListView3.as_view(), name='list'),
-    path('hobby/', ArticleListView4.as_view(), name='list'),
-    path('programming/', ArticleListView5.as_view(), name='list'),
-    path('other/', ArticleListView6.as_view(), name='list'),
+    path('language_study/', ArticleListView1.as_view(), name='list_lang'),
+    path('employment/', ArticleListView2.as_view(), name='list_employ'),
+    path('public_officer/', ArticleListView3.as_view(), name='list_public'),
+    path('hobby/', ArticleListView4.as_view(), name='list_hobby'),
+    path('programming/', ArticleListView5.as_view(), name='list_coding'),
+    path('other/', ArticleListView6.as_view(), name='list_other'),
 
     path('create/', ArticleCreateView.as_view(), name='create'),
 
