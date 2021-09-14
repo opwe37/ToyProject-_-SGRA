@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+<div style="display: flex">
+    <div style="margin-right: 3rem; padding: 1rem; position: relative;">
+        <span>
+            <img style="border-radius: 20rem; width: 7rem; object-fit: cover;" src="{{ target_user.profile.thumbnail }}" alt="">
+        </span>
+        <button class="thumbnail-edit material-icons-outlined">photo_camera</button>
+    </div>
+    <div style="flex: 1">
+        <div>
+            <h3>닉네임</h3>
+            <p>{{ target_user.profile.nickname }}</p>
+        </div>
+        <div>
+            <h3>자기소개</h3>
+            <p>{{ target_user.profile.message }}</p>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <p>내 게시글 & 댓글</p>
+</div>
+
+{% endblock %}

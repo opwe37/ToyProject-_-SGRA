@@ -1,0 +1,12 @@
+.thumbnail-edit {
+    position: absolute;
+    right: 15px;
+    bottom: 60px;
+
+    padding: .3rem;
+    margin: 0;
+
+    background: white;
+    border-radius: 20rem;
+    color: black;
+}
