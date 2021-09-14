@@ -4,9 +4,18 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from articleapp.models import Article
+from freearticleapp.models import FreeArticle
 
 
 class Comment(models.Model):
+
+    article = models.ForeignKey(Article, on_delete=models.SET_NULL,
+                                related_name='comments', null=True)
+
+    freearticle = models.ForeignKey(FreeArticle, on_delete=models.SET_NULL,
+                                related_name='free_comments', null=True)
+
     writer = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='comments')
     content = models.TextField()

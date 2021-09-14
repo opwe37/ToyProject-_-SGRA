@@ -36,7 +36,7 @@ function submitComment(article_pk) {
 }
 
 
-function submitCommentReply(parent_pk, target_comment=parent_pk) {
+function submitCommentReply(parent_pk, article_pk, target_comment=parent_pk) {
     const data = {};
 
     const input = document.querySelector(`div[data-key="${target_comment}"] .reply-container .comment-reply-input`);
@@ -49,6 +49,7 @@ function submitCommentReply(parent_pk, target_comment=parent_pk) {
     data['content'] = input.innerText;
     data['parent_pk'] = parent_pk;
     data['secret'] = false;
+    data['article_pk'] = article_pk;
 
     sendDataPost(COMMENT_CREATE_URL, data);
 }
