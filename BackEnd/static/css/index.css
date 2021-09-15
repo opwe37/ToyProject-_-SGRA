@@ -1,0 +1,22 @@
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+}
+
+.article_item {
+    width: 33%;
+    min-width: 274px;
+    margin-bottom: .3rem;
+}
+
+@media screen and (max-width: 992px) {
+    .article_item {
+        width: 100%;
+    }
+}
+
+.article_item + .article_item {
+    margin-top: 0 !important;
+}

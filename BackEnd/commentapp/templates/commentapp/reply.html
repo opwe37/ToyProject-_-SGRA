@@ -1,14 +1,18 @@
 <div class="comment-item" data-key="{{ reply.pk }}">
     <div class="comment">
         <div class="thumbnail">
-            <img src="{{ reply.writer.profile.thumbnail }}" alt="" class="thumbnail-image">
+            <a href="{% url 'profileapp:detail' pk=reply.writer.pk %}?tab=study">
+                <img src="{{ reply.writer.profile.thumbnail }}" alt="" class="thumbnail-image">
+            </a>
         </div>
 
         <div class="body">
 
             <div class="header">
-                <span><b>{{ reply.writer }}</b></span>
-                <span>{{ reply.created_string }}</span>
+                <a href="{% url 'profileapp:detail' pk=reply.writer.pk %}?tab=study">
+                    <span><b>{{ reply.writer.profile.nickname }}</b></span>
+                </a>
+                <span style="padding-left: 0.5rem">{{ reply.created_string }}</span>
             </div>
 
             <div class="main">

@@ -1,11 +1,22 @@
 <header class="container mt-5">
     <div style="display: flex; justify-content: space-between; height: 50px; align-items:center">
         <a href="/">SGRA</a>
-        {% if user.is_authenticated %}
-            <a href="{% url 'accountsapp:logout' %}">{{ user.username }}(Logout)</a>
-        {% else %}
-            <a href="{% url 'accountsapp:login' %}?next={{ request.path }}">Login</a>
-        {% endif %}
+        <div class="user-menu" style="position: relative;">
+            {% if user.is_authenticated %}
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user.profile.nickname }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'profileapp:detail' pk=user.pk %}?tab=study">내 정보</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'accountsapp:logout' %}">로그 아웃</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'accountsapp:login' %}?next={{ request.path }}">Login</a>
+            {% endif %}
+        </div>
     </div>
 
     <div style="text-align: center; height: 48px; line-height: 48px;">
@@ -16,3 +27,29 @@
 
     <hr/>
 </header>
+
+<script>
+    const userMenu = document.querySelector('.user-menu');
+    const btnDropdown = userMenu.querySelector('.dropdown-toggle');
+
+    document.addEventListener('click', event => {
+        var clicked = null;
+        const dropdownMenu = userMenu.querySelector('.dropdown-menu');
+
+        if (event.target == btnDropdown) {
+            const isVisible = dropdownMenu.offsetWidth > 0 || dropdownMenu.offsetHeight > 0;
+            if (!isVisible) {
+                dropdownMenu.style.display = 'block';
+                clicked = btnDropdown;
+            } else {
+                dropdownMenu.style.display = 'none';
+                clicked = null;
+            }
+        }
+
+        if (clicked != btnDropdown) {
+            dropdownMenu.style.display = 'none';
+            clicked = null;
+        }
+    });
+</script>

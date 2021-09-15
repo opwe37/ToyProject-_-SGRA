@@ -2,13 +2,17 @@
     <div class="comment">
 
         <div class="thumbnail">
-            <img src="{{ comment.writer.profile.thumbnail }}" alt="" class="thumbnail-image">
+            <a href="{% url 'profileapp:detail' pk=comment.writer.pk %}?tab=study">
+                <img src="{{ comment.writer.profile.thumbnail }}" alt="" class="thumbnail-image">
+            </a>
         </div>
 
         <div class="body">
             <div class="header">
-                <span><b>{{ comment.writer }}</b></span>
-                <span>{{ comment.created_string }}</span>
+                <a href="{% url 'profileapp:detail' pk=comment.writer.pk %}?tab=study">
+                    <span><b>{{ comment.writer.profile.nickname }}</b></span>
+                </a>
+                <span style="padding-left: 0.5rem">{{ comment.created_string }}</span>
             </div>
 
             <div class="main">

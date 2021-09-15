@@ -1,7 +1,7 @@
 .thumbnail-edit {
     position: absolute;
     right: 15px;
-    bottom: 60px;
+    top: 90px;
 
     padding: .3rem;
     margin: 0;
@@ -9,4 +9,19 @@
     background: white;
     border-radius: 20rem;
     color: black;
+}
+
+blockquote {
+    border-left: 2px solid;
+    padding-left: 1rem;
+}
+
+.active {
+    background-color: #717984 !important;
+    color: white !important;
+    border-color: white !important;
+}
+
+.active > a {
+    color: white;
 }

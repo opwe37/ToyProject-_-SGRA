@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 
-<h2 style="text-align: center; margin-bottom: 3.5rem; ">스터디 게시판!</h2>
-<div class="container" style="padding-right: 30rem; text-align: center; align-items: center; ">
-{% for topic in article_list %}
-    <a href="{% url 'articleapp:detail' pk=topic.pk %}" style="width: 100%">
-        <div class="col-sm-12">
-             <div class="card border-secondary" style= "border-radius: 1.25rem; ">
-                 <div class="card-body" >
-                     <h4 class="card-title">제목 : {{ topic.title }}</h4>
-                     <h6 class="card-subtitle mb-2 text-muted">리더 : {{ topic.writer }}  </h6>
-                     <h6 class="card-subtitle mb-2 text-muted">분야 : {{ topic.progress_method }}  </h6>
-                     <h6 class="card-subtitle mb-2 text-muted">작성일자 : {{ topic.created_at }}  </h6>
-                     <h6 class="card-subtitle mb-2 text-muted">지역 : {{ topic.region }}  </h6>
-                     <h6 class="card-subtitle mb-2 text-muted">조회수 : {{ topic.hits }}</h6>
-                 </div>
-             </div>
-         </div>
-    </a>
-{% endfor %}
+<div class="my-5">
+    <div>
+        <div style="display: flex; justify-content: space-between;">
+            <h5>스터디 게시판</h5>
+            <a href="{% url 'articleapp:list' category='all' %}" style="bottom:0">더보기<i class="material-icons-outlined" style="vertical-align:bottom">navigate_next</i></a>
+        </div>
+        <div class="flex-container">
+            {% include 'snippets/study_list_fragment.html' with article_list=article_list %}
+        </div>
+    </div>
+
+    <div class="my-5">
+        <div style="display: flex; justify-content: space-between;">
+            <h5>자유 게시판</h5>
+            <a href="{% url 'freearticleapp:list' %}" style="bottom:0">더보기<i class="material-icons-outlined" style="vertical-align:bottom">navigate_next</i></a>
+        </div>
+        <div class="flex-container">
+            {% include 'snippets/free_list_fragment.html' with article_list=free_article_list %}
+        </div>
+    </div>
 </div>
-
-{% include 'freearticleapp/home.html' with article_free_list=article_free_list %}
-
 {% endblock content %}

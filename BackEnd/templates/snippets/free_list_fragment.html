@@ -1,0 +1,18 @@
+{% for topic in article_list %}
+    <div class="article_item col-sm-12">
+        <a href="{% url 'freearticleapp:detail' pk=topic.pk %}" style="width: 100%">
+            <div class="col-sm-12">
+                <div class="card border-secondary">
+                    <div class="card-body">
+                        <h4 class="card-title">제목 : {{ topic.title }}</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">작성자 : {{ topic.writer }}  </h6>
+                        <h6 class="card-subtitle mb-2 text-muted">작성일자 : {{ topic.created_at }}  </h6>
+                        <h6 class="card-subtitle mb-2 text-muted">조회수 : {{ topic.hits }}</h6>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+{% empty %}
+    <div>게시글이 없습니다.</div>
+{% endfor %}

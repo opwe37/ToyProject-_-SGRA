@@ -1,0 +1,33 @@
+{% for topic in article_list %}
+<div class="article_item col-sm-12">
+    <a href="{% url 'articleapp:detail' pk=topic.pk %}">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <span class="card-text">#{{ topic.progress_method }}</span>
+                    <span class="card-text">#{{ topic.region }}</span>
+                </div>
+
+                <h4 class="card-title my-3">{{ topic.title }}</h4>
+
+                <div style="display: flex; font-size: 0.85rem; margin:0;">
+                    <p class="card-subtitle mb-2 text-muted" style="margin-bottom: 0 !important">
+                        <span class="material-icons-outlined" style="vertical-align: middle; font-size:18px;">schedule</span>
+                        <span style="vertical-align: middle;">{{ topic.created_string }}</span>
+                    </p>
+                    <p class="card-subtitle mb-2 text-muted ms-2" style="margin-bottom: 0 !important">
+                        <span class="material-icons-outlined" style="vertical-align: middle; font-size:18px;">visibility</span>
+                        <span style="vertical-align: middle;">{{ topic.hits }}</span>
+                    </p>
+                    <p class="card-subtitle mb-2 text-muted ms-2" style="margin-bottom: 0 !important">
+                        <span class="material-icons-outlined" style="vertical-align: middle; font-size:18px;">comment</span>
+                        <span style="vertical-align: middle;">{{ topic.comments.count }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+{% empty %}
+    <div>게시글이 없습니다.</div>
+{% endfor %}

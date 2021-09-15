@@ -88,3 +88,14 @@ a:hover{
     width: 2.5rem;
     margin-right: 1rem;
 }
+
+.article_item + .article_item {
+    margin-top: .5rem;
+}
+
+.card-link {
+    color: #2962ff;
+}
+.card-link:hover{
+    color: #2962ff;
+}

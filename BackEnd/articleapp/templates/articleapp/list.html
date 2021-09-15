@@ -9,34 +9,16 @@
     </a>
 </div>
 
-<form class="form-inline mb-4" action="{% url 'articleapp:search' %}" method="get" style="display: flex;">
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_word" value="{{ request.GET.search_word }}" style="flex:1;">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-</form>
-
+<div class="my-3">
+    <form class="form-inline mb-4" action="{% url 'articleapp:search' %}" method="get" style="display: flex;">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_word" value="{{ request.GET.search_word }}" style="flex:1;">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</div>
 <hr/>
 
 <div class="my-4">
-{% for topic in article_list %}
-    <div class="col-sm-12 mt-3">
-        <a href="{% url 'articleapp:detail' pk=topic.pk %}">
-            <div class="card">
-                <div class="card-body">
-                    <div>
-                        <span class="card-text">#{{ topic.progress_method }}</span>
-                        <span class="card-text">#{{ topic.region }}</span>
-                    </div>
-                    <h4 class="card-title">{{ topic.title }}</h4>
-                    <h6 class="card-subtitle mb-2 text-muted">작성자: {{ topic.writer }}  </h6>
-        <!--                    <h6 class="card-subtitle mb-2 text-muted">분야 : {{ topic.progress_method }}  </h6>-->
-                    <h6 class="card-subtitle mb-2 text-muted">{{ topic.created_at }}  </h6>
-        <!--                    <h6 class="card-subtitle mb-2 text-muted">지역 : {{ topic.region }}  </h6>-->
-                    <h6 class="card-subtitle mb-2 text-muted">조회수: {{ topic.hits }}</h6>
-                </div>
-            </div>
-        </a>
-    </div>
-{% endfor %}
+    {% include 'snippets/study_list_fragment.html' with article_list=article_list %}
 </div>
 
 {% endblock %}
