@@ -10,7 +10,7 @@
 
     <div style="text-align: center; height: 48px; line-height: 48px;">
         <a href="{% url 'articleapp:home' %}">홈</a>
-        <a href="{% url 'articleapp:list_all' %}">스터디</a>
+        <a href="{% url 'articleapp:list' category='all' %}">스터디</a>
         <a href="{% url 'freearticleapp:list' %}">자유게시판</a>
     </div>
 

@@ -9,9 +9,8 @@
     </a>
 </div>
 
-<form class="form-inline mb-4" action="{% url 'articleapp:search' %}" method="post" style="display: flex;">
-    {% csrf_token %}
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_word" value="{{search_word}}" style="flex:1;">
+<form class="form-inline mb-4" action="{% url 'articleapp:search' %}" method="get" style="display: flex;">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_word" value="{{ request.GET.search_word }}" style="flex:1;">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 </form>
 

@@ -2,7 +2,7 @@ from django.urls import path
 
 from freearticleapp import views
 from freearticleapp.views import ArticleListView, ArticleCreateView, ArticleDetailView, ArticleUpdateView, \
-    ArticleDeleteView, FreeArticleHomeView
+    ArticleDeleteView
 
 app_name = 'freearticleapp'
 

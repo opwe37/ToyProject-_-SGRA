@@ -3,20 +3,12 @@ from django.views.generic import TemplateView
 
 from articleapp import views
 from articleapp.views import ArticleCreateView, ArticleDetailView, ArticleUpdateView, ArticleDeleteView, \
-    ArticleListView, ArticleListView6, ArticleListView1, ArticleListView2, ArticleListView3, ArticleListView4, \
-    ArticleListView5, ArticleHomeView
+    ArticleListView, ArticleHomeView
 
 app_name = 'articleapp'
 
 urlpatterns = [
-    path('list/', ArticleListView.as_view(), name='list_all'),
-
-    path('language_study/', ArticleListView1.as_view(), name='list_lang'),
-    path('employment/', ArticleListView2.as_view(), name='list_employ'),
-    path('public_officer/', ArticleListView3.as_view(), name='list_public'),
-    path('hobby/', ArticleListView4.as_view(), name='list_hobby'),
-    path('programming/', ArticleListView5.as_view(), name='list_coding'),
-    path('other/', ArticleListView6.as_view(), name='list_other'),
+    path('<str:category>/list/', ArticleListView.as_view(), name='list'),
 
     path('create/', ArticleCreateView.as_view(), name='create'),
 

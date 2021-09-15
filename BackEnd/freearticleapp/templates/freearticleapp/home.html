@@ -1,21 +1,20 @@
 
 <h2 style="text-align: center; margin-bottom: 3.5rem; margin-top:3rem;">자유 게시판!</h2>
 
-    <div class="container" style="padding-right: 30rem; text-align: center; align-items: center; ">
-    {% for topic in article_free_list %}
-        <a href="{% url 'freearticleapp:detail' pk=topic.pk %}" style="width: 100%">
-                        <div class="col-sm-12">
-                             <div class="card border-secondary" style= "border-radius: 1.25rem; ">
-                                 <div class="card-body" >
-                                     <h4 class="card-title">제목 : {{ topic.title }}</h4>
-                                     <h6 class="card-subtitle mb-2 text-muted">작성자 : {{ topic.writer }}  </h6>
-                                     <h6 class="card-subtitle mb-2 text-muted">작성일자 : {{ topic.created_at }}  </h6>
-                                     <h6 class="card-subtitle mb-2 text-muted">조회수 : {{ topic.hits }}</h6>
-                                 </div>
-                             </div>
-                         </div>
-            </a>
-
-    {% endfor %}
-    </div>
+<div class="container" style="padding-right: 30rem; text-align: center; align-items: center; ">
+{% for topic in article_free_list %}
+    <a href="{% url 'freearticleapp:detail' pk=topic.pk %}" style="width: 100%">
+        <div class="col-sm-12">
+             <div class="card border-secondary" style= "border-radius: 1.25rem; ">
+                 <div class="card-body" >
+                     <h4 class="card-title">제목 : {{ topic.title }}</h4>
+                     <h6 class="card-subtitle mb-2 text-muted">작성자 : {{ topic.writer }}  </h6>
+                     <h6 class="card-subtitle mb-2 text-muted">작성일자 : {{ topic.created_at }}  </h6>
+                     <h6 class="card-subtitle mb-2 text-muted">조회수 : {{ topic.hits }}</h6>
+                 </div>
+             </div>
+         </div>
+    </a>
+{% endfor %}
+</div>
 

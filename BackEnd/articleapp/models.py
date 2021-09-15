@@ -7,20 +7,20 @@ class Article(models.Model):
 
     writer = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='article')
-    title = models.CharField(max_length=200 ,verbose_name='제목')
+    title = models.CharField(max_length=200, verbose_name='제목')
     image = models.ImageField(upload_to='article/', null=True)
     content = models.TextField(verbose_name='글 내용')
     created_at = models.DateTimeField(auto_now_add=True)
 
     NATIONAL_CHOICES1 = (
-            ('서울특별시', '서울특별시'),
-            ('경기도', '경기도'),
-            ('강원도', '강원도'),
-            ('충청도', '충청도'),
-            ('전라도', '전라도'),
-            ('경상도', '경상도'),
-            ('제주도', '제주도')
-        )
+        ('서울특별시', '서울특별시'),
+        ('경기도', '경기도'),
+        ('강원도', '강원도'),
+        ('충청도', '충청도'),
+        ('전라도', '전라도'),
+        ('경상도', '경상도'),
+        ('제주도', '제주도')
+    )
 
     NATIONAL_CHOICES2 = (
         ('전체', '전체'),
@@ -33,7 +33,7 @@ class Article(models.Model):
     )
 
     NATIONAL_CHOICES3 = (
-        ('상관없음','상관없음'),
+        ('상관없음', '상관없음'),
         ('1~2명', '1~2명'),
         ('3~4명', '3~4명'),
         ('5~6명', '5~6명'),

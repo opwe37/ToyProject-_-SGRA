@@ -48,7 +48,7 @@ class ArticleDetailView(DetailView, FormMixin):
         clicked_article = FreeArticle.objects.get(pk=kwargs['pk'])
         clicked_article.hits += 1
         clicked_article.save()
-        print(clicked_article.hits)
+
         return super().get(request, *args, **kwargs)
 
 
@@ -87,11 +87,3 @@ class SearchFormView(FormView):
         context['object_list'] = post_list
 
         return render(self.request, self.template_name, context)
-
-class FreeArticleHomeView(ListView):
-    model = FreeArticle
-    context_object_name = 'article_free_list'
-    template_name = 'freearticleapp/home.html'
-
-    def get_queryset(self):
-        return FreeArticle.objects.order_by('-created_at')[:5]

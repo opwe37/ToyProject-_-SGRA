@@ -1,10 +1,13 @@
 
 <div style="text-align: center;">
-        <a href="{% url 'articleapp:list_all' %}">전체</a>
-        <a href="{% url 'articleapp:list_lang' %}">어학</a>
-        <a href="{% url 'articleapp:list_employ' %}">취업</a>
-        <a href="{% url 'articleapp:list_public' %}">고시/공무원</a>
-        <a href="{% url 'articleapp:list_hobby' %}">취미/교양</a>
-        <a href="{% url 'articleapp:list_coding' %}">프로그래밍</a>
-        <a href="{% url 'articleapp:list_other' %}">기타</a>
+        <a href="{% url 'articleapp:list' category='all' %}">전체</a>
+        <a href="{% url 'articleapp:list' category='lang' %}">어학</a>
+        <a href="{% url 'articleapp:list' category='employ' %}">취업</a>
+        <a href="{% url 'articleapp:list' category='public' %}">고시/공무원</a>
+        <a href="{% url 'articleapp:list' category='hobby' %}">취미/교양</a>
+        <a href="{% url 'articleapp:list' category='coding' %}">프로그래밍</a>
+        <a href="{% url 'articleapp:list' category='etc' %}">기타</a>
 </div>
+
+
+
