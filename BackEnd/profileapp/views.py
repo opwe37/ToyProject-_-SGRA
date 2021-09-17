@@ -20,7 +20,7 @@ class ProfileDetailView(DetailView):
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
-        selected_tab = self.request.GET.get('tab');
+        selected_tab = self.request.GET.get('tab')
         if selected_tab == 'study':
             context['object_list'] = Article.objects.filter(writer_id=kwargs['object'].pk)
         elif selected_tab == 'free':

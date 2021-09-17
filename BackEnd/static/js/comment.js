@@ -19,7 +19,7 @@ textArea.addEventListener('focusin', (e) => {
   btn.hidden = false;
 });
 
-function submitComment(article_pk) {
+function submitComment(article_pk, articleType='study') {
     const data = {};
     const input = document.querySelector('.public-comment-input');
     if (input.innerText.trimEnd() == '') {    // 보낼 데이터가 없다면
@@ -29,7 +29,11 @@ function submitComment(article_pk) {
     }
 
     data['content'] = input.innerText;
-    data['article_pk'] = article_pk;
+    if (articleType == 'study') {
+        data['article_pk'] = article_pk;
+    } else if (articleType == 'free'){
+        data['freearticle_pk'] = article_pk;
+    }
     data['secret'] = document.querySelector(".public-comment-btn input[type='checkbox']").checked;
 
     sendDataPost(COMMENT_CREATE_URL, data);

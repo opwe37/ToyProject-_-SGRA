@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="{% static 'css/comment.css' %}">
 
-{% include 'commentapp/create.html' with target_article=target_article %}
+{% include 'commentapp/create.html' with target_article=target_article target_article_type=target_article_type %}
 
 <div class="comments-container">
     {% for comment in target_article.comments.all %}

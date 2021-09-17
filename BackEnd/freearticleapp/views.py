@@ -18,7 +18,7 @@ from freearticleapp.models import FreeArticle
 class ArticleListView(ListView):
     model = FreeArticle
     context_object_name = 'article_free_list'
-    template_name = 'freearticleapp/free_list.html'
+    template_name = 'freearticleapp/list.html'
     paginate_by = 20
 
 
@@ -73,17 +73,15 @@ class ArticleDeleteView(DeleteView):
     template_name = 'freearticleapp/delete.html'
 
 
-class SearchFormView(FormView):
-    form_class = PostSearchForm
-    template_name = 'freearticleapp/post_search.html'
+class ArticleSearchView(ListView):
+    model = FreeArticle
+    context_object_name = 'article_free_list'
+    template_name = 'freearticleapp/list.html'
 
-    def form_valid(self, form):
-        searchWord = form.cleaned_data['search_word']
-        post_list = FreeArticle.objects.filter(Q(title__icontains=searchWord) | Q(content__icontains=searchWord) | Q(writer__username__icontains=searchWord)).distinct()
+    def get_queryset(self):
+        search_key = self.request.GET['search_word']
+        post_list = FreeArticle.objects.filter(
+            Q(title__icontains=search_key) | Q(content__icontains=search_key) | Q(writer__username__icontains=search_key)
+        ).distinct()
 
-        context = {}
-        context['form'] = form
-        context['search_term'] = searchWord
-        context['object_list'] = post_list
-
-        return render(self.request, self.template_name, context)
+        return post_list

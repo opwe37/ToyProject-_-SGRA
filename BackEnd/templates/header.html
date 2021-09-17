@@ -1,31 +1,34 @@
-<header class="container mt-5">
-    <div style="display: flex; justify-content: space-between; height: 50px; align-items:center">
-        <a href="/">SGRA</a>
-        <div class="user-menu" style="position: relative;">
-            {% if user.is_authenticated %}
-                <div class="dropdown">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ user.profile.nickname }}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="{% url 'profileapp:detail' pk=user.pk %}?tab=study">내 정보</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'accountsapp:logout' %}">로그 아웃</a>
+<header class="navbar navbar-expand navbar-light flex-column flex-md-row bd-navbar">
+    <div class="container my-2">
+        <a class="navbar-brand" href="/">SGRA</a>
+
+        <div class="navbar-nav-scroll">
+            <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
+                <li class="nav-item"><a class="nav-link {% if request.path == '/' %} active {% endif %}" href="{% url 'home' %}">홈</a></li>
+                <li class="nav-item"><a class="nav-link {% if '/articles/' in request.path %} active {% endif %}" href="{% url 'articleapp:list' category='all' %}">스터디</a></li>
+                <li class="nav-item"><a class="nav-link {% if '/freearticles/' in request.path %} active {% endif %}" href="{% url 'freearticleapp:list' %}">자유게시판</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-nav flex-row d-md-flex" style="margin-left:auto">
+            <div class="user-menu" style="position: relative;">
+                {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ user.profile.nickname }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{% url 'profileapp:detail' pk=user.pk %}?tab=study">내 정보</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'accountsapp:logout' %}">로그 아웃</a>
+                        </div>
                     </div>
-                </div>
-            {% else %}
-                <a href="{% url 'accountsapp:login' %}?next={{ request.path }}">Login</a>
-            {% endif %}
+                {% else %}
+                    <a href="{% url 'accountsapp:login' %}?next={{ request.path }}">로그인</a>
+                {% endif %}
+            </div>
         </div>
     </div>
-
-    <div style="text-align: center; height: 48px; line-height: 48px;">
-        <a href="{% url 'articleapp:home' %}">홈</a>
-        <a href="{% url 'articleapp:list' category='all' %}">스터디</a>
-        <a href="{% url 'freearticleapp:list' %}">자유게시판</a>
-    </div>
-
-    <hr/>
 </header>
 
 <script>

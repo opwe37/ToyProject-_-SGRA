@@ -4,70 +4,81 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 
-<div style="display: flex">
-    <div style="margin-right: 3rem; padding: 1rem; position: relative;">
-        <span>
-            <img style="border-radius: 20rem; width: 7rem; object-fit: cover;" src="{{ target_user.profile.thumbnail }}" alt="">
-        </span>
-        <button class="thumbnail-edit material-icons-outlined">photo_camera</button>
-    </div>
-    <div style="flex: 1; padding:1rem 0;">
-        <div style="margin-bottom: 1.5rem;">
-            <h3>{{ target_user.profile.nickname }}</h3>
+<div class="my-3">
+    <div class="profile" style="display: flex">
+        <div class="thumbnail col-3" style="margin-right: 3rem; padding: 1rem; position: relative;">
+            <img class="img-thumbnail rounded-circle" style="width:100%; object-fit: cover;" src="{{ target_user.profile.thumbnail }}" alt="">
         </div>
-
-        {% if user == target_user %}
-        <div class="mt-3">
-            <label>상태 메시지</label>
-
-            <div class="mt-2">
-                <input class="message-edit" type="text" value="{{ target_user.profile.message }}" style="width:100%; padding:.375rem .75rem;"/>
+        <div style="flex: 1; padding:1rem 0;">
+            <div style="margin-bottom: 1.5rem;">
+                <h3>{{ target_user.profile.nickname }}</h3>
             </div>
 
-            <button class="edit-submit btn btn-primary mt-2" onclick="submitInfoEdit({{ target_user.pk }})">수정</button>
+            {% if user == target_user %}
+            <div class="mt-3">
+                <label>상태 메시지</label>
+
+                <div class="mt-2">
+                    <input class="message-edit" type="text" value="{{ target_user.profile.message }}" style="width:100%; padding:.375rem .75rem;"/>
+                </div>
+
+                <button class="edit-submit btn btn-primary mt-2" onclick="submitInfoEdit({{ target_user.pk }})">수정</button>
+            </div>
+            {% else %}
+                <blockquote> {{ target_user.profile.message }} </blockquote>
+            {% endif %}
         </div>
-        {% else %}
-            <blockquote> {{ target_user.profile.message }} </blockquote>
-        {% endif %}
     </div>
-</div>
 
-<div class="row">
-    <legend>게시글</legend>
-    <div class="col-md-3">
-        <nav class="list-group">
-            <a class="list-group-item {% if request.GET.tab == 'study' %} active {% endif %}" href="?tab=study"><div>스터디</div></a>
-            <a class="list-group-item {% if request.GET.tab == 'free' %} active {% endif %}" href="?tab=free"><div>자유게시판</div></a>
-            {% if user == target_user %}
-            <a class="list-group-item {% if request.GET.tab == 'comment' %} active {% endif %}" href="?tab=comment"><div>댓글</div></a>
-            {% endif %}
-        </nav>
-    </div>
-    <div class="col-md-9">
-        {% if request.GET.tab == 'comment' %}
-            {% if user == target_user %}
-                {% for comment in object_list %}
-                    <div class="card">
-                        <p class="card-header">스터디 게시판</p>
-                        <div class="card-body">
-                            <div class="card-text" style="font-weight:500">{{ comment.content }}</div>
-                            <div style="font-size:.875rem; margin-top:8px">
-                                <a class="card-link" href="{% url 'articleapp:detail' pk=comment.article.pk %}">{{ comment.article.title }}</a>
-                                에 남긴 댓글
+    <div class="row">
+        <legend>게시글</legend>
+        <div class="col-md-3">
+            <nav class="list-group">
+                <a class="list-group-item {% if request.GET.tab == 'study' %} active {% endif %}" href="?tab=study"><div>스터디</div></a>
+                <a class="list-group-item {% if request.GET.tab == 'free' %} active {% endif %}" href="?tab=free"><div>자유게시판</div></a>
+                {% if user == target_user %}
+                <a class="list-group-item {% if request.GET.tab == 'comment' %} active {% endif %}" href="?tab=comment"><div>댓글</div></a>
+                {% endif %}
+            </nav>
+        </div>
+        <div class="col-md-9">
+            {% if request.GET.tab == 'comment' %}
+                {% if user == target_user %}
+                    {% for comment in object_list %}
+                        <div class="card">
+                            {% if comment.article %}
+                                <p class="card-header">스터디 게시판</p>
+                            {% endif %}
+                            {% if comment.freearticle %}
+                                <p class="card-header">자유 게시판</p>
+                            {% endif %}
+
+                            <div class="card-body">
+                                <div class="card-text" style="font-weight:500">{{ comment.content }}</div>
+                                <div style="font-size:.875rem; margin-top:8px">
+                                    {% if comment.article %}
+                                    <a class="card-link" href="{% url 'articleapp:detail' pk=comment.article.pk %}">{{ comment.article.title }}</a>
+                                    {% endif %}
+                                    {% if comment.freearticle %}
+                                    <a class="card-link" href="{% url 'freearticleapp:detail' pk=comment.freearticle.pk %}">{{ comment.freearticle.title }}</a>
+                                    {% endif %}
+                                    에 남긴 댓글
+                                </div>
+                                <div class="card-text text-muted" style="font-size:.75rem">{{ comment.created_string }}</div>
                             </div>
-                            <div class="card-text text-muted" style="font-size:.75rem">{{ comment.created_string }}</div>
                         </div>
-                    </div>
-                {% empty %}
-                    <div>작성한 댓글이 없습니다.</div>
-                {% endfor %}
+                    {% empty %}
+                        <div>작성한 댓글이 없습니다.</div>
+                    {% endfor %}
+                {% endif %}
+            {% elif request.GET.tab == 'study' %}
+                {% include 'snippets/study_list_fragment.html' with article_list=object_list%}
+            {% elif request.GET.tab == 'free' %}
+                {% include 'snippets/free_list_fragment.html' with article_list=object_list%}
             {% endif %}
-        {% else %}
-            {% include 'snippets/study_list_fragment.html' with article_list=object_list%}
-        {% endif %}
+        </div>
     </div>
 </div>
-
 <script src="{% static 'js/utils.js' %}"></script>
 <script>
     const USER_INFO_UPDATE_URL = '/profile/update/__target__';

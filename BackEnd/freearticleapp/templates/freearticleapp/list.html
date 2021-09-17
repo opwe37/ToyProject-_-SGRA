@@ -1,23 +1,22 @@
 {% extends  'base.html' %}
+
 {% block content %}
 
-{% include 'articleapp/article_header.html' %}
-
 <div class="mb-4" style="text-align: right; position:fixed; bottom: 3rem; right: 3rem; z-index:1000">
-    <a href="{% url 'articleapp:create' %}" class="btn btn-outline-dark rounded-circle">
+    <a href="{% url 'freearticleapp:create' %}" class="btn btn-outline-dark rounded-circle">
         <span class="material-icons-outlined" style="font-size: 3rem">add</span>
     </a>
 </div>
 
 <div class="my-3">
-    <form class="form-inline mb-4" action="{% url 'articleapp:search' %}" method="get" style="display: flex;">
+    <form class="form-inline mb-4" action="{% url 'freearticleapp:search' %}" method="get" style="display: flex;">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_word" value="{{ request.GET.search_word }}" style="flex:1;">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 </div>
 
 <div>
-    {% include 'snippets/study_list_fragment.html' with article_list=article_list %}
+    {% include 'snippets/free_list_fragment.html' with article_list=article_free_list %}
 </div>
 
 {% endblock %}

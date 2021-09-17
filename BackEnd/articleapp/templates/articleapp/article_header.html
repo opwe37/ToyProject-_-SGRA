@@ -1,12 +1,27 @@
-
-<div style="text-align: center;">
-        <a href="{% url 'articleapp:list' category='all' %}">전체</a>
-        <a href="{% url 'articleapp:list' category='lang' %}">어학</a>
-        <a href="{% url 'articleapp:list' category='employ' %}">취업</a>
-        <a href="{% url 'articleapp:list' category='public' %}">고시/공무원</a>
-        <a href="{% url 'articleapp:list' category='hobby' %}">취미/교양</a>
-        <a href="{% url 'articleapp:list' category='coding' %}">프로그래밍</a>
-        <a href="{% url 'articleapp:list' category='etc' %}">기타</a>
+<div class="navbar navbar-light navbar-expand flex-column">
+    <ul class="navbar-nav bd-navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link {% if 'all' in request.path %} active {% endif %}" href="{% url 'articleapp:list' category='all' %}">전체</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if 'lang' in request.path %} active {% endif %}" href="{% url 'articleapp:list' category='lang' %}">어학</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if 'employ' in request.path %} active {% endif %}" href="{% url 'articleapp:list' category='employ' %}">취업</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if 'public' in request.path %} active {% endif %}" href="{% url 'articleapp:list' category='public' %}">고시/공무원</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if 'hobby' in request.path %} active {% endif %}" href="{% url 'articleapp:list' category='hobby' %}">취미/교양</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if 'coding' in request.path %} active {% endif %}" href="{% url 'articleapp:list' category='coding' %}">프로그래밍</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if 'etc' in request.path %} active {% endif %}" href="{% url 'articleapp:list' category='etc' %}">기타</a>
+        </li>
+    </ul>
 </div>
 
 

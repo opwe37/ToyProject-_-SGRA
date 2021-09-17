@@ -2,12 +2,24 @@
     <div class="article_item col-sm-12">
         <a href="{% url 'freearticleapp:detail' pk=topic.pk %}" style="width: 100%">
             <div class="col-sm-12">
-                <div class="card border-secondary">
+                <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">제목 : {{ topic.title }}</h4>
-                        <h6 class="card-subtitle mb-2 text-muted">작성자 : {{ topic.writer }}  </h6>
-                        <h6 class="card-subtitle mb-2 text-muted">작성일자 : {{ topic.created_at }}  </h6>
-                        <h6 class="card-subtitle mb-2 text-muted">조회수 : {{ topic.hits }}</h6>
+                        <h4 class="card-title">{{ topic.title }}</h4>
+
+                        <div style="display: flex; font-size: 0.85rem; margin:0;">
+                            <p class="card-subtitle mb-2 text-muted" style="margin-bottom: 0 !important">
+                                <span class="material-icons-outlined" style="vertical-align: middle; font-size:18px;">schedule</span>
+                                <span style="vertical-align: middle;">{{ topic.created_string }}</span>
+                            </p>
+                            <p class="card-subtitle mb-2 text-muted ms-2" style="margin-bottom: 0 !important">
+                                <span class="material-icons-outlined" style="vertical-align: middle; font-size:18px;">visibility</span>
+                                <span style="vertical-align: middle;">{{ topic.hits }}</span>
+                            </p>
+                            <p class="card-subtitle mb-2 text-muted ms-2" style="margin-bottom: 0 !important">
+                                <span class="material-icons-outlined" style="vertical-align: middle; font-size:18px;">comment</span>
+                                <span style="vertical-align: middle;">{{ topic.comments.count }}</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ class Comment(models.Model):
                                 related_name='comments', null=True)
 
     freearticle = models.ForeignKey(FreeArticle, on_delete=models.SET_NULL,
-                                    related_name='free_comments', null=True)
+                                    related_name='comments', null=True)
 
     writer = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='comments')

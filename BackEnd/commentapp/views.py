@@ -61,6 +61,13 @@ class CommentDeleteView(DeleteView):
         return self.post(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('articleapp:detail', kwargs={'pk':self.object.article_id})
+        # 현재 지워지는 댓글이 어떤 article(study or free)의 자식인지 파악해
+        # 해당 게시글 화면으로 리다이렉트
+        if self.object.freearticle:
+            return reverse('freearticleapp:detail', kwargs={'pk': self.object.freearticle_id})
+
+        if self.object.article:
+            return reverse('articleapp:detail', kwargs={'pk': self.object.article_id})
+
 
 

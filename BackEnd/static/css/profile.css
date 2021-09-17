@@ -1,16 +1,3 @@
-.thumbnail-edit {
-    position: absolute;
-    right: 15px;
-    top: 90px;
-
-    padding: .3rem;
-    margin: 0;
-
-    background: white;
-    border-radius: 20rem;
-    color: black;
-}
-
 blockquote {
     border-left: 2px solid;
     padding-left: 1rem;
@@ -24,4 +11,14 @@ blockquote {
 
 .active > a {
     color: white;
+}
+
+@media screen and (max-width: 768px) {
+    .profile {
+        flex-direction: column;
+    }
+    .profile .thumbnail {
+        align-self: center;
+        width:60%;
+    }
 }

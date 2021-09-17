@@ -101,7 +101,7 @@ class ArticleListView(ListView):
 # FormView 를 상속받게 해놨던데, 무슨 이유라도?
 # 검색결과 화면은 ListView 아닌가?
 class SearchFormView(ListView):
-    form_class = PostSearchForm
+    model = Article
     context_object_name = 'article_list'
     template_name = 'articleapp/list.html'
 
@@ -132,20 +132,6 @@ class SearchFormView(ListView):
         ).distinct()
 
         return post_list
-
-
-class ArticleHomeView(ListView):
-    model = Article
-    context_object_name = 'article_list'
-    template_name = 'articleapp/home.html'
-
-    def get_queryset(self):
-        return Article.objects.order_by('-created_at')[:5]
-
-    def get_context_data(self, **kwargs):
-        article_free_list = FreeArticle.objects.all()
-        return super().get_context_data(article_free_list=article_free_list,
-                                        **kwargs)
 
 
 
