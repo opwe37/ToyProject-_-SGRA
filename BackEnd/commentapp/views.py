@@ -4,6 +4,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 from django.urls import reverse_lazy, reverse
+from django.views import View
 from django.views.generic import CreateView, ListView, DeleteView, RedirectView
 from commentapp.forms import CommentCreationForm
 from commentapp.models import Comment
@@ -32,18 +33,16 @@ class CommentCreateView(CreateView):
         return HttpResponse()
 
 
-class CommentUpdateView(RedirectView):
-
+class CommentUpdateView(View):
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
+
         target_comment = Comment.objects.get(pk=kwargs['pk'])
         target_comment.content = data['content']
         target_comment.secret = data['secret']
         target_comment.save()
-        return super().post(request, *args, **kwargs)
 
-    def get_redirect_url(self):
-        return reverse('commentapp:list')
+        return HttpResponse()
 
 
 class CommentListView(ListView):

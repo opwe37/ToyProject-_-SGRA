@@ -1,10 +1,15 @@
-<div>
-    <div class="public-comment-input" contenteditable="True" placeholder="댓글 추가"></div>
-    <div class="public-comment-btn" hidden>
-        <label>
-            <input type="checkbox" name="secret"> 비밀댓글
-        </label>
-        <button class="comment-cancel">취소</button>
-        <button  name="article_pk" value="{{ target_article.pk }}" onclick="submitComment({{ target_article.pk }}, '{{ target_article_type }}')">댓글</button>
+<div class="d-flex my-4">
+    <div class="thumbnail">
+        <img src="{{ user.profile.thumbnail }}" alt="" class="thumbnail-image">
+    </div>
+    <div class="flex-fill">
+        <div class="public-comment-input" contenteditable="True" placeholder="댓글 추가"></div>
+        <div class="public-comment-btn" hidden>
+            <label>
+                <input type="checkbox" name="secret"> 비밀댓글
+            </label>
+            <button class="comment-cancel">취소</button>
+            <button  name="article_pk" value="{{ target_article.pk }}" onclick="submitComment({{ target_article.pk }}, '{{ target_article_type }}')">댓글</button>
+        </div>
     </div>
 </div>
