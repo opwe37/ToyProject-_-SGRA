@@ -72,9 +72,9 @@
                     {% endfor %}
                 {% endif %}
             {% elif request.GET.tab == 'study' %}
-                {% include 'snippets/study_list_fragment.html' with article_list=object_list%}
+                {% include 'snippets/study_list_fragment.html' with article_list=object_list %}
             {% elif request.GET.tab == 'free' %}
-                {% include 'snippets/free_list_fragment.html' with article_list=object_list%}
+                {% include 'snippets/free_list_fragment.html' with article_list=object_list %}
             {% endif %}
         </div>
     </div>

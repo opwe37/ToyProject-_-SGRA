@@ -1,11 +1,23 @@
+<style>
+    div img{
+            width: 20%;
+            border-radius: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+</style>
+
 {% for topic in article_list %}
     <div class="article_item col-sm-12">
+
         <a href="{% url 'freearticleapp:detail' pk=topic.pk %}" style="width: 100%">
             <div class="col-sm-12">
+
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">{{ topic.title }}</h4>
-
+                        <img src="{{ topic.image.url }}" alt="">
                         <div style="display: flex; font-size: 0.85rem; margin:0;">
                             <p class="card-subtitle mb-2 text-muted" style="margin-bottom: 0 !important">
                                 <span class="material-icons-outlined" style="vertical-align: middle; font-size:18px;">schedule</span>
