@@ -10,7 +10,7 @@ class ArticleCreationForm(ModelForm):
                                                                     'min-height : 10rem'}))
     class Meta:
         model = FreeArticle
-        fields = ['title', 'content']
+        fields = ['title','image','content']
 
 
 class PostSearchForm(forms.Form):

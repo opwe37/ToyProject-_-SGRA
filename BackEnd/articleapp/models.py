@@ -25,7 +25,6 @@ class Article(models.Model):
     )
 
     NATIONAL_CHOICES2 = (
-        ('전체', '전체'),
         ('어학', '어학'),
         ('취업', '취업'),
         ('고시/공무원', '고시/공무원'),
